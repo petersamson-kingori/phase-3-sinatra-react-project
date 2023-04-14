@@ -3,7 +3,8 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/" do
-    { message: "Good luck with your project!" }.to_json
+    blogs = Blog.all
+    blogs.to_json
   end
 
    # Retrieve all blogs in JSON format
@@ -15,34 +16,34 @@ class ApplicationController < Sinatra::Base
 
 # GET /blogs/art
 get "/blogs/art" do
-  category = Category.find_by(name: 'Art') # Find the 'Art' category
+  category = Category.find_by(name: 'Art') 
   if category
-    blogs = category.blogs # Retrieve blogs associated with the category
-    blogs.to_json # Convert blogs to JSON format
+    blogs = category.blogs 
+    blogs.to_json 
   else
-    { error: 'Category not found' }.to_json # Return error message if category not found
+    { error: 'Category not found' }.to_json 
   end
 end
 
 # GET /blogs/design
 get "/blogs/design" do
-  category = Category.find_by(name: 'Design') # Find the 'Design' category
+  category = Category.find_by(name: 'Design') 
   if category
-    blogs = category.blogs # Retrieve blogs associated with the category
-    blogs.to_json # Convert blogs to JSON format
+    blogs = category.blogs 
+    blogs.to_json 
   else
-    { error: 'Category not found' }.to_json # Return error message if category not found
+    { error: 'Category not found' }.to_json 
   end
 end
 
 # GET /blogs/technology
 get "/blogs/technology" do
-  category = Category.find_by(name: 'Technology') # Find the 'Technology' category
+  category = Category.find_by(name: 'Technology')
   if category
-    blogs = category.blogs # Retrieve blogs associated with the category
-    blogs.to_json # Convert blogs to JSON format
+    blogs = category.blogs 
+    blogs.to_json 
   else
-    { error: 'Category not found' }.to_json # Return error message if category not found
+    { error: 'Category not found' }.to_json 
   end
 end
 
@@ -105,6 +106,6 @@ delete "/blogs/:id" do
 end
 
 get "/blogs/new" do
-  blogs = Blog.order(created_at: :desc).limit(10) # Retrieve 10 latest blogs by creation date
-  blogs.to_json # Convert blogs to JSON format
+  blogs = Blog.order(created_at: :desc).limit(10)
+  blogs.to_json 
 end
