@@ -1,30 +1,17 @@
 puts "🌱 Seeding spices..."
 
-# Seed your database here
-art_category = Category.find_by(name: 'Art')
+art_category = Category.find_or_create_by(name: 'Art')
+design_category = Category.find_or_create_by(name: 'Design')
+technology_category = Category.find_or_create_by(name: 'Technology')
 
-if art_category
-  blogs = Blog.where(category_id: nil) # Fetch blogs with null category_id
-  blogs.each do |blog|
-    blog.categories << art_category # Add art_category to blog's categories
-  end
-end
+# Create sample blogs
+blog1 = Blog.create(title: 'Sample Blog 1', content: 'This is a sample blog about art.')
+blog2 = Blog.create(title: 'Sample Blog 2', content: 'This is a sample blog about design.')
+blog3 = Blog.create(title: 'Sample Blog 3', content: 'This is a sample blog about technology.')
 
-design_category = Category.find_by(name: 'Design')
+# Assign categories to sample blogs using categorizations
+Categorization.create(blog: blog1, category: art_category)
+Categorization.create(blog: blog2, category: design_category)
+Categorization.create(blog: blog3, category: technology_category)
 
-if design_category
-  blogs = Blog.where(category_id: nil) # Fetch blogs with null category_id
-  blogs.each do |blog|
-    blog.categories << design_category # Add design_category to blog's categories
-  end
-end
-
-technology_category = Category.find_by(name: 'Technology')
-
-if technology_category
-  blogs = Blog.where(category_id: nil) # Fetch blogs with null category_id
-  blogs.each do |blog|
-    blog.categories << technology_category # Add technology_category to blog's categories
-  end
-end
 puts "✅ Done seeding!"

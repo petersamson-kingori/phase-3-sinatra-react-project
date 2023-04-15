@@ -3,8 +3,8 @@ class CreateBlogs < ActiveRecord::Migration[6.1]
     create_table :blogs do |t|
       t.string :title
       t.text :content
-      t.datetime :created_at, precision: 6, null: false
-      t.datetime :updated_at, precision: 6, null: false
+      t.belongs_to :category # Add a foreign key reference to categories table
+      t.timestamps
     end
   end
 end

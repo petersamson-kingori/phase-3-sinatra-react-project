@@ -1,3 +1,4 @@
 class Category < ActiveRecord::Base
-    has_and_belongs_to_many :blogs
-  end
+  has_many :blog_categories
+  has_many :blogs, through: :blog_categories
+end
